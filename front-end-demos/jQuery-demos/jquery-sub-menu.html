@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Hover Menu</title>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <style>
+            .left-menu>ul {
+                list-style: none;
+                width: 300px;
+                float: left;
+            }
+
+            .left-menu>ul>li {
+                position: relative;
+                background-color: red;
+                color: white;
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+            .archor {
+                float: right;
+            }
+            .sub-menu {
+                position: absolute;
+                top: 0;
+                left: 300px;
+                background-color: #ccc;
+                border: 1px solid #ccc;
+                width: 200px;
+                padding: 0;
+                display: none;
+            }
+            .sub-menu>li{
+                list-style: none;
+                width: 100px;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="left-menu">
+            <ul>
+                <li>数码<span class="archor">></span>
+                    <ul class="sub-menu">
+                        <li>电脑</li>
+                        <li>手机</li>
+                        <li>笔记本</li>
+                        <li>配件</li>
+                        <li>电脑</li>
+                        <li>手机</li>
+                        <li>笔记本</li>
+                        <li>配件</li>
+                        <li>电脑</li>
+                        <li>手机</li>
+                        <li>笔记本</li>
+                        <li>配件</li>
+                    </ul>
+                </li>
+                <li>超市<span class="archor">></span>
+                    <ul class="sub-menu">
+                        <li>粮油</li>
+                        <li>日用品</li>
+                        <li>粮油</li>
+                        <li>粮油</li>
+                        <li>粮油</li>
+                        <li>粮油</li>
+                        <li>日用品</li>
+                        <li>日用品</li>
+                        <li>日用品</li>
+                        <li>日用品</li>
+                    </ul>
+                </li>
+                <li>服饰<span class="archor">></span>
+                    <ul class="sub-menu">
+                        <li>男装</li>
+                        <li>女装</li>
+                        <li>童装</li>
+                    </ul>
+                </li>
+                <li>食品<span class="archor">></span>
+                    <ul class="sub-menu">
+                        <li>食品</li>
+                        <li>零食</li>
+                        <li>饮料</li>
+                    </ul>
+                </li>
+                <li>化妆品<span class="archor">></span>
+                    <ul class="sub-menu">
+                        <li>日韩化妆品</li>
+                        <li>欧美化妆品</li>
+                    </ul>
+                </li>
+                <li>首饰<span class="archor">></span>
+                    <ul class="sub-menu">
+                        <li>黄金</li>
+                        <li>铂金</li>
+                        <li>玉器</li>
+                        <li>钻石</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <script>
+            $('.left-menu>ul').on('mouseenter', 'li', function(){
+                $(this).find('.sub-menu').css('display', 'block');
+            });
+            $('.left-menu>ul').on('mouseleave', 'li', function(){
+                $(this).find('.sub-menu').css('display', 'none');
+            });
+        </script>
+    </body>
+</html>
