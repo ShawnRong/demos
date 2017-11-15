@@ -49,6 +49,9 @@
           left: 50%;
           transform: translate(-50%,-50%);
         }
+        .container a {
+          margin-top: 10px;
+        }
       </style>
     </head>
   <body>
@@ -130,22 +133,143 @@
           </ul>
         </li>
       </ul>
+      <a href="#" class="button is-link">添加</a>
+    </div>
+    <div class="container">
+      <div class="tabs is-centered">
+        <ul>
+          <li class="is-active"><a>最新上映</a></li>
+          <li><a>电影</a></li>
+          <li><a>电视剧</a></li>
+        </ul>
+      </div>
+      <!-- new movies -->
+      <ul class="movie-list">
+        <li class="panel is-selected">
+          <ul class="is-clearfix">
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+          </ul>
+        </li>
+        <li class="panel">
+          <ul class="is-clearfix">
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+          </ul>
+        </li>
+        <li class="panel">
+          <ul class="is-clearfix">
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
     <script>
+      $(function() {
+
+      var movies = [
+        {
+          img: '../imgs/thor3.jpg',
+          name: '雷神3：诸神之战'
+        },
+        {
+          img: '../imgs/justice-aliance.jpg',
+          name: '正义联盟'
+        }
+      ];
+
+      var global = 0;
+
+      function addMovie(movie){
+        var html = '';
+        html += '<li class="movie">';
+        html += '<div class="cover"><a href="#" class="button is-primary">立即购票</a></div>';
+        html += '<img src="' + movie.img + '" alt="'+ movie.name+'">';
+        html += '<div class="detail is-size-5">' + movie.name + '</div>';
+        html += '</li>';
+
+        return html;
+      }
+
       $('.tabs>ul').on('click', 'li', function(){
-        $(this).addClass('is-active');
-        $(this).siblings().removeClass('is-active');
-        var index = $(this).index();
-        $('.movie-list').find('.panel').removeClass('is-selected');
-        $('.movie-list').find('.panel').eq(index).addClass('is-selected');
+        var $cur = $(this);
+        $cur.siblings().removeClass('is-active');
+        $cur.addClass('is-active');
+        var index = $cur.index();
+        $cur.parents('.container').find('.panel').removeClass('is-selected');
+        $cur.parents('.container').find('.panel').eq(index).addClass('is-selected');
+
+        console.log($(this).index())
+        global = $(this).index();
       });
 
-      $('.movie').on('mouseenter', function(){
+      $('.panel').on('mouseenter', '.movie', function(){
         $(this).find('.cover').addClass('hover');
       });
-      $('.movie').on('mouseleave', function(){
+      $('.panel').on('mouseleave', '.movie', function(){
         $(this).find('.cover').removeClass('hover');
       });
+
+      $('.container a').on('click', function(e){
+        e.preventDefault();
+        $.each(movies, function(index, movie){
+          var html = addMovie(movie);
+          $('.movie-list ul').eq(global).append(html);
+        });
+        })
+      })
+
+
     </script>
   </body>
 </html>
