@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>jQuery product list</title>
+      <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"></script>
+      <link href="https://cdn.bootcss.com/bulma/0.6.0/css/bulma.css" rel="stylesheet">
+      <style>
+        .movie {
+          float: left;
+          width: 250px;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          margin-left: 10px;
+          margin-top: 10px;
+          position: relative;
+        }
+        .detail {
+          text-align: center;
+        }
+        .movie>img{
+          width: 100%; height: 300px;
+        }
+        .panel {
+          display: none;
+        }
+        .panel.is-selected {
+          display: block;
+        }
+        .cover {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          background: rgba(0,0,0, 0.3);
+          transition: all 0.3s;
+          opacity: 0;
+        }
+        .cover.hover {
+          opacity: 1;
+        }
+        .cover .button{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+      </style>
+    </head>
+  <body>
+    <div class="container">
+      <div class="tabs is-centered">
+        <ul>
+          <li class="is-active"><a>最新上映</a></li>
+          <li><a>电影</a></li>
+          <li><a>电视剧</a></li>
+        </ul>
+      </div>
+      <!-- new movies -->
+      <ul class="movie-list">
+        <li class="panel is-selected">
+          <ul class="is-clearfix">
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+          </ul>
+        </li>
+        <li class="panel">
+          <ul class="is-clearfix">
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/thor3.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">雷神3：诸神之战</div>
+            </li>
+          </ul>
+        </li>
+        <li class="panel">
+          <ul class="is-clearfix">
+            <li class="movie">
+              <div class="cover"><a href="#" class="button is-primary">立即购票</a></div>
+              <img src="../imgs/justice-aliance.jpg" alt="justice-aliance">
+              <div class="detail is-size-5">正义联盟</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script>
+      $('.tabs>ul').on('click', 'li', function(){
+        $(this).addClass('is-active');
+        $(this).siblings().removeClass('is-active');
+        var index = $(this).index();
+        $('.movie-list').find('.panel').removeClass('is-selected');
+        $('.movie-list').find('.panel').eq(index).addClass('is-selected');
+      });
+
+      $('.movie').on('mouseenter', function(){
+        $(this).find('.cover').addClass('hover');
+      });
+      $('.movie').on('mouseleave', function(){
+        $(this).find('.cover').removeClass('hover');
+      });
+    </script>
+  </body>
+</html>
