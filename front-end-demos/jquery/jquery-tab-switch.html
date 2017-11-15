@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>jQuery tab switch</title>
+  <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  <style type="text/css">
+    .container {
+      width: 600px;
+      margin: 0 auto;
+    }
+    .container * {
+      box-sizing: border-box;
+    }
+    ul,li{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }	
+    .clearfix:after{
+      content: '';
+      clear: both;
+      display: block;
+    }
+    .tabs li{
+      float: left;
+      width: 33.3%;
+      border: 1px solid #ccc;
+      text-align: center;
+      cursor: pointer;
+    }
+    .active {
+      background-color: #ccc;
+    }
+    .content{
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+    }
+    .panels{
+      position: relative;
+      width: 100%;
+    }
+    .panels>li {
+      height: 300px;
+      padding: 20px;
+      position: absolute;
+      width: 600px;
+    }
+    .panels>li:nth-child(1) {
+      background-color: red;
+
+    }
+    .panels>li:nth-child(2) {
+      background-color: green;
+      left: 600px;
+    }
+    .panels>li:nth-child(3) {
+      background-color: blue;
+      left: 1200px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <ul class="tabs clearfix">
+    <li>tab1</li>
+    <li>tab2</li>
+    <li>tab3</li>
+  </ul> 
+  <div class="content">
+    <ul class="panels">
+      <li>content1</li>
+      <li>content2</li>
+      <li>content3</li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.tabs').on('click', 'li', function(){
+    var $this = $(this);
+    $this.siblings().removeClass('active');
+    $this.addClass('active');
+    var index = $this.index();
+    var panelWidth = $('.content').width();
+    $this.parents().find('.panels')
+         .animate({left: -panelWidth * index});
+  })
+</script>
+</body>
+</html>
