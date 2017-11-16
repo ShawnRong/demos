@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>jQuery product list</title>
+      <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"></script>
+      <link href="https://cdn.bootcss.com/bulma/0.6.0/css/bulma.css" rel="stylesheet">
+      <style>
+        .contents ul li{
+          text-align: center;
+          margin: 10px;
+          border: 1px solid #ccc;
+          padding: 10px;
+        }
+        .li-hover {
+          background-color: #00d1b2;
+          border-color: transparent;
+          color: #fff;
+        }
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="contents">
+        <ul class="menu-list">
+          <li>content1</li>
+        </ul>
+      </div>
+      <div class="has-text-centered">
+        <a id="load" class="button is-primary">Load more</a>
+      </div>
+    </div>
+    <script>
+      var len = 5;
+      var curIndex = 2;
+      var isLoading = false;
+
+      $('.menu-list').on('mouseenter', 'li', function(){
+        $(this).addClass('li-hover');
+      }).on('mouseleave', 'li', function(){
+        $(this).removeClass('li-hover');
+      })
+
+      $('#load').on('click', function(e){
+        e.preventDefault();
+
+        if(isLoading){
+          return
+        }
+
+        var $this = $(this);
+        $this.addClass('is-loading');
+        isLoading = true;
+        $.ajax({
+          url: 'https://www.easy-mock.com/mock/5a000670a38b573f291fad23/example/loadmore',
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/x-www-form-urlencoded'
+          },
+          data: generateBody(curIndex, len)
+        }).done(function(response){
+          for(var index in response.data) {
+            $('.menu-list').append('<li>'+ response.data[index] +'</li>');
+          }
+          curIndex = curIndex + len;
+          isLoading = false;
+          $this.removeClass('is-loading');
+        }).fail(function(jqXHR, textStatus){
+          console.log(textStatus);
+        })
+      })
+    //generate mock data body
+    function generateBody(start, length) {
+      var body = '';
+      for(var i = 0; i < length; i++) {
+        var count = start + i;
+        body += 'content' + count + '=content' + count + '&';
+      }
+      return body.slice(0, -1);
+    }
+    </script>
+  </body>
+</html>
