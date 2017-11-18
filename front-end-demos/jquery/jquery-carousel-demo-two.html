@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>jQuery Test</title>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <style>
+          ul li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+          .carousel .imgs{
+            width: 1600px;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+          }
+          /*
+          .carousel .imgs::after{
+            content: '';
+            clear: both;
+            display: block;
+          }
+          .carousel .imgs img{
+            width: 400px;
+            height: 200px;
+          }
+          */
+          .carousel .imgs>li {
+            width: 400px;
+            float: left;
+          }
+          .carousel {
+            width: 400px;
+            height: 200px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+          }
+          .carousel .arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 30px;
+            text-decoration: none;
+            color: #fff;
+            margin-top: -30px;
+            border: 2px solid #fff;
+            width: 40px;
+            height: 40px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 25px;
+          }
+          .carousel .arrow:hover {
+            opacity: 0.6;
+          }
+          .carousel .prev {
+            left: 10px;
+          }
+          .carousel .next {
+            right: 10px;
+          }
+          .carousel .bullet {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            text-align: center;
+            font-size: 0;
+            padding: 0;
+            margin: 0;
+            bottom: 15px;
+          }
+          .carousel .bullet>li {
+            display: inline-block;
+            width: 30px;
+            height: 8px;
+            border-radius: 8px;
+            margin: 0 3px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+          }
+          .carousel .bullet>li.active {
+            background-color: #ccc;
+          }
+        </style>
+    </head>
+    <body>
+      <div class="carousel">
+        <ul class="imgs">
+          <li><a href="#"><img src="../imgs/slide-1.jpg" alt="slide-1"></a></li>
+          <li><a href="#"><img src="../imgs/slide-2.jpg" alt="slide-2"></a></li>
+          <li><a href="#"><img src="../imgs/slide-3.jpg" alt="slide-3"></a></li>
+          <li><a href="#"><img src="../imgs/slide-4.jpeg" alt="slide-4"></a></li>
+        </ul>
+        <a href="#" class="arrow prev"><</a>
+        <a href="#" class="arrow next">></a>
+        <ul class="bullet">
+          <li class="active"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <script>
+        var $imgCt = $('.imgs');
+        var $imgs = $('.imgs li');
+        var imgWidth = $imgs.width();
+        var imgCount = $imgs.length;
+
+        var isAnimate = false;
+        var curIndex = 0;
+
+        $('.prev').on('click', function(){
+          playPrev();
+        });
+
+        $('.next').on('click', function(){
+          playNext();
+        });
+        $('.bullet li').on('click', function(){
+          var index = $(this).index();
+          play(index);
+        });
+
+        play(0);
+        autoPlay();
+
+        function playPrev() {
+          play((imgCount + curIndex - 1) % imgCount)
+        }
+
+        function playNext() {
+          play((curIndex + 1) % imgCount)
+        }
+
+        function play(idx){
+          if(isAnimate) return;
+          isAnimate = true;
+          $imgs.eq(curIndex).fadeOut(500);
+          $imgs.eq(idx).fadeIn(500, function(){
+            isAnimate = false;
+          });
+          curIndex = idx;
+          setBullet();
+        }
+
+        function setBullet(){
+          $('.bullet li').removeClass('active')
+                        .eq(curIndex)
+                        .addClass('active');
+        }
+        function stopAuto(){
+          clearInterval(clock);
+        }
+        function autoPlay(){
+          clock = setInterval(function(){
+            playNext()
+          }, 2000);
+        }
+      </script>
+    </body>
+</html>

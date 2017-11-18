@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>jQuery Test</title>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <style>
+          ul li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+          .carousel .imgs{
+            width: 1600px;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+          }
+          /*
+          .carousel .imgs::after{
+            content: '';
+            clear: both;
+            display: block;
+          }
+          .carousel .imgs img{
+            width: 400px;
+            height: 200px;
+          }
+          */
+          .carousel .imgs>li {
+            width: 400px;
+            float: left;
+          }
+          .carousel {
+            width: 400px;
+            height: 200px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+          }
+          .carousel .arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 30px;
+            text-decoration: none;
+            color: #fff;
+            margin-top: -30px;
+            border: 2px solid #fff;
+            width: 40px;
+            height: 40px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 25px;
+          }
+          .carousel .arrow:hover {
+            opacity: 0.6;
+          }
+          .carousel .prev {
+            left: 10px;
+          }
+          .carousel .next {
+            right: 10px;
+          }
+          .carousel .bullet {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            text-align: center;
+            font-size: 0;
+            padding: 0;
+            margin: 0;
+            bottom: 15px;
+          }
+          .carousel .bullet>li {
+            display: inline-block;
+            width: 30px;
+            height: 8px;
+            border-radius: 8px;
+            margin: 0 3px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+          }
+          .carousel .bullet>li.active {
+            background-color: #ccc;
+          }
+        </style>
+    </head>
+    <body>
+      <div class="carousel">
+        <ul class="imgs">
+          <li><a href="#"><img src="../imgs/slide-1.jpg" alt="slide-1"></a></li>
+          <li><a href="#"><img src="../imgs/slide-2.jpg" alt="slide-2"></a></li>
+          <li><a href="#"><img src="../imgs/slide-3.jpg" alt="slide-3"></a></li>
+          <li><a href="#"><img src="../imgs/slide-4.jpeg" alt="slide-4"></a></li>
+        </ul>
+        <a href="#" class="arrow prev"><</a>
+        <a href="#" class="arrow next">></a>
+        <ul class="bullet">
+          <li class="active"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <script>
+        var $imgs = $('.imgs>li');
+        var $imgCt = $('.imgs');
+
+        var imgWidth = $imgs.width();
+
+        var isAnimate = false;
+        var pageIndex = 0;
+
+        $imgCt.append($imgs.first().clone())
+        $imgCt.prepend($imgs.last().clone())
+        $imgCt.width(($imgs.length + 2) * imgWidth)
+        $imgCt.css({left: -imgWidth});
+
+        $('.carousel .prev').on('click', function() {
+          playPrev(1);
+        });
+
+        $('.carousel .next').on('click', function(){
+          playNext(1);
+        });
+        $('.bullet li').on('click', function(){
+          var index = $(this).index();
+          if(index > pageIndex) {
+            playNext(index - pageIndex)
+          }else if(index < pageIndex) {
+            playPrev(pageIndex - index)
+          }
+        })
+
+        function playNext(len) {
+          if(isAnimate) return;
+          isAnimate = true;
+          $imgCt.animate({
+            left: '-=' + len * imgWidth
+          }, function(){
+            pageIndex += len;
+            if(pageIndex == $imgs.length) {
+              pageIndex = 0;
+              $imgCt.css({left: -imgWidth});
+            }
+            setBullet();
+            isAnimate = false;
+          });
+        }
+
+        function playPrev(len) {
+          if(isAnimate) return;
+          isAnimate = true;
+          $imgCt.animate({
+            left: '+=' + len * imgWidth
+          }, function(){
+            pageIndex -= len;
+            if (pageIndex < 0){
+              pageIndex = $imgs.length - 1;
+              $imgCt.css({left: -imgWidth * $imgs.length})
+            }
+            setBullet();
+            isAnimate = false;
+          })
+        }
+        function setBullet(){
+          $('.bullet li').removeClass('active')
+                        .eq(pageIndex)
+                        .addClass('active');
+        }
+      </script>
+    </body>
+</html>
