@@ -13,3 +13,5 @@
 [jQuery carousel demo 1](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-carousel-demo-one.html)
 
 [jQuery carousel demo 2](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-carousel-demo-two.html)
+
+[jQuery water fall](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-waterfall.html)

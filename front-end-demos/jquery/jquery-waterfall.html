@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>jQuery Test</title>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <style>
+          .container {
+            position: relative;
+          }
+          .container .item {
+            position: absolute;
+            width: 200px;
+            margin-right: 10px;
+            margin-top: 10px;
+            transition: all 1s;
+          }
+          .h1 {
+            height: 200px;
+            background-color: #f4b300;
+          }
+          .h2 {
+            height: 300px;
+            background-color: #691bb8;
+          }
+          .h3 {
+            height: 400px;
+            background-color: #006ac1;
+          }
+        </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="item h1">1</div>
+        <div class="item h3">2</div>
+        <div class="item h1">3</div>
+        <div class="item h2">4</div>
+        <div class="item h2">5</div>
+        <div class="item h3">6</div>
+        <div class="item h1">7</div>
+        <div class="item h3">8</div>
+        <div class="item h2">9</div>
+        <div class="item h1">10</div>
+        <div class="item h2">11</div>
+        <div class="item h3">12</div>
+        <div class="item h1">13</div>
+        <div class="item h2">14</div>
+      </div>
+    <script>
+      /*
+      waterFall();
+
+      $(window).on('resize', function() {
+        waterFall();
+      });
+
+      function waterFall() {
+        var nodeWidth = $('.item').width();
+        var colLenth = parseInt($('.container').width() / nodeWidth);
+        var itemArr = [];
+        for(var i=0; i<colLenth; i++){
+          itemArr[i] = 0;
+        }
+
+        $('.item').each(function(){
+          var minValue = Math.min.apply(null, itemArr);
+          var minIndex = itemArr.indexOf(minValue);
+
+          $(this).css({
+            top: itemArr[minIndex],
+            left: $(this).outerWidth(true) * minIndex
+          });
+
+          itemArr[minIndex] += $(this).outerHeight(true);
+        })
+      }
+      */
+      var WaterFall = (function(){
+        function init(){
+          waterFall();
+          $(window).on('resize', function() {
+            waterFall();
+          });
+        }
+        function waterFall() {
+          var nodeWidth = $('.item').width();
+          var colLenth = parseInt($('.container').width() / nodeWidth);
+          //空数组长度为一列的item数量
+          var itemArr = [];
+          for(var i=0; i<colLenth; i++){
+            itemArr[i] = 0;
+          }
+
+          $('.item').each(function(){
+            //获取数据中高度最小的下标
+            var minValue = Math.min.apply(null, itemArr);
+            var minIndex = itemArr.indexOf(minValue);
+
+            $(this).css({
+              top: itemArr[minIndex],
+              left: $(this).outerWidth(true) * minIndex
+            });
+
+            itemArr[minIndex] += $(this).outerHeight(true);
+          })
+        }
+        return {
+          init: init
+        }
+      })();
+
+      WaterFall.init();
+
+    </script>
+    </body>
+</html>
