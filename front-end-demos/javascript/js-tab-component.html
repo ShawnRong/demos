@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>jQuery Test</title>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" type="text/css">
+        <style>
+          .content ul {
+            list-style: none;
+          }
+          .content ul>li {
+            display: none;
+          }
+          .content ul .active {
+            display: block;
+          }
+        </style>
+    </head>
+    <body>
+      <div class="container-one">
+      <div class="tabs">
+        <ul>
+          <li class="is-active"><a>Pictures</a></li>
+          <li><a>Music</a></li>
+          <li><a>Videos</a></li>
+          <li><a>Documents</a></li>
+        </ul>
+      </div>
+      <div class="content">
+        <ul>
+          <li class="active">Picture content</li>
+          <li>Music content</li>
+          <li>Video content</li>
+          <li>Documents content</li>
+        </ul>
+      </div>
+      </div>
+      <hr>
+      <div class="container-two">
+      <div class="tabs">
+        <ul>
+          <li class="is-active"><a>Pictures</a></li>
+          <li><a>Music</a></li>
+          <li><a>Videos</a></li>
+          <li><a>Documents</a></li>
+        </ul>
+      </div>
+      <div class="content">
+        <ul>
+          <li class="active">Picture content</li>
+          <li>Music content</li>
+          <li>Video content</li>
+          <li>Documents content</li>
+        </ul>
+      </div>
+      </div>
+      <script>
+
+        function Tab(ct){
+          this.ct = ct;
+          this.init();
+          this.bind();
+        }
+
+        Tab.prototype.init = function() {
+          this.tabs = this.ct.querySelector('.tabs');
+          this.tabLists = this.ct.querySelectorAll('.tabs ul>li');
+          this.content = this.ct.querySelectorAll('.content ul>li');
+        }
+
+        Tab.prototype.bind = function() {
+          var _this = this;
+
+          this.tabs.addEventListener('click', function(e){
+            if (e.target.parentNode.tagName.toLowerCase() === 'li') {
+              _this.tabLists.forEach(function(tabList){
+                tabList.classList.remove('is-active');
+              });
+              e.target.parentNode.classList.add('is-active');
+              var index = Array.prototype.indexOf.call(_this.tabLists, e.target.parentNode);
+
+              _this.content.forEach(function(contentList) {
+                contentList.classList.remove('active');
+              });
+
+              _this.content[index].classList.add('active');
+            }
+          });
+        }
+
+        new Tab(document.querySelector('.container-one'));
+        new Tab(document.querySelector('.container-two'));
+
+        </script>
+    </body>
+</html>

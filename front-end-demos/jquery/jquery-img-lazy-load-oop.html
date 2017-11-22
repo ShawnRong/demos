@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>jQuery Test</title>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <style>
+        ul li {
+          list-style: none;
+        }
+        .container {
+          width: 600px;
+          margin: 0 auto;
+        }
+        ul>li {
+          float: left;
+          width: 50%;
+        }
+        .clearfix::after {
+          content: '';
+          clear: both;
+          display: block;
+        }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+      <ul class="clearfix">
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/1.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/2.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/3.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/4.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/5.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/1.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/2.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/3.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/4.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/5.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/1.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/2.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/3.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/4.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/5.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/1.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/2.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/3.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/4.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/5.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/1.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/2.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/3.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/4.jpg"></a></li>
+        <li><a href="#"><img src="../imgs/blank.jpg" alt="blank" data-img="../imgs/5.jpg"></a></li>
+      </ul>
+    </div>
+    <script>
+
+        function Exposure($target, callback) {
+          this.$target = $target;
+          this.callback = callback;
+          this.bind();
+          this.check();
+        }
+
+        Exposure.prototype.bind = function() {
+          var _this = this;
+          var clock;
+          $(window).on('scroll', function(){
+            if(clock){
+              clearTimeout(clock);
+            }
+            clock = setTimeout(function(){
+              _this.check()
+            }, 100);
+          });
+        }
+
+        Exposure.prototype.isView = function() {
+          var scrollTop = $(window).scrollTop();
+          var windowHeight = $(window).height();
+
+          var offsetTop = this.$target.offset().top;
+
+          if (offsetTop > scrollTop && offsetTop < scrollTop + windowHeight) {
+            return true
+          }
+          return false
+        }
+
+        Exposure.prototype.check = function() {
+          if(this.isView(this.$target)){
+            this.callback(this.$target);
+          }
+        }
+
+        //Lazy load
+        var Lazy = (function(){
+          return {
+            init: function($target, callback){
+              $target.each(function(idx, target){
+                new Exposure($(target), callback);
+              })
+            }
+          }
+        })();
+
+        Lazy.init($('.container img'), function($node){
+          showImg($node);
+        });
+
+        function showImg($img){
+          var imgUrl = $img.attr('data-img');
+          $img.attr('src', imgUrl);
+        }
+    </script>
+    </body>
+  </html>

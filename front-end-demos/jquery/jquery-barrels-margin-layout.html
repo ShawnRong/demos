@@ -37,43 +37,50 @@
     <body>
       <div class="img-preview"></div>
     <script>
-      function Barrels($ct) {
+   function Barrels($ct) {
         this.$ct=$ct;
-        this.imgNum=10;
+        this.imgNum=30;
         this.baseHeight=200;
         this.rowList=[];
         this.imgIndex=0;
-        this.marginRight=20;
+        this.marginRight=10;
         this.loadImg();
-      }
-      Barrels.prototype = {
-        loadImg: function() {
-          var _this = this;
-          var imgs = this.getImgUrls(this.imgNum);
-          $.each(imgs, function(idx, url){
-            var img = new Image();
-            img.src = url;
-            img.onload = function() {
-              _this.imgIndex ++;
-              var orginWidth = img.width,
-                  orginHeight = img.height,
-                  ratio = orginWidth / orginHeight;
-              var imgInfo = {
-                target: $(this),
-                width: _this.baseHeight * ratio,
-                height: _this.baseHeight
-              }
-              _this.render(imgInfo);
-            }
-          });
+    }
+    Barrels.prototype={
+        loadImg:function () {
+            var _this=this;
+            var imgs=this.getImgUrls(_this.imgNum);
+            $.each(imgs,function (idx,url) {
+                var img=new Image();
+                img.src=url;
+                img.onload=function () {
+                    _this.imgIndex++;
+                    var originWidth = img.width,
+                        originHeight = img.height,
+                        ratio = originWidth/originHeight;
+                    var imgInfo={
+                        target:img,
+                        width: _this.baseHeight*ratio,
+                        height: _this.baseHeight
+                    };
+                    _this.render(imgInfo);
+                }
+            })
         },
-        render: function(imgInfo){
-          var _this = this;
-          var rowList = this.rowList,
-              rowWidth = 0,
-              clientWidth = this.$ct.width(),
-              lastImgInfo = imgInfo;
-
+        getImgUrls:function (num) {
+            var width,height,urls=[];
+            for(var i=0;i<num;i++){
+                width=Math.floor(Math.random()*500+800);
+                height=Math.floor(Math.random()*400+600);
+                urls.push("https://unsplash.it/"+width+"/"+height);
+            }
+            return urls;
+        },
+        render:function (imgInfo) {
+          var clientWidth=this.$ct.width();
+          var rowWidth=0;
+          var lastImgInfo=imgInfo;
+          var newRowHeight=0;
           this.rowList.push(imgInfo);
           for(var i=0;i<this.rowList.length;i++){
               rowWidth+=this.rowList[i].width+this.marginRight;
@@ -82,40 +89,41 @@
               this.rowList.pop();
               rowWidth=rowWidth-lastImgInfo.width-this.marginRight;
               newRowHeight=(clientWidth* this.baseHeight)/rowWidth;
-              this.createRow(newRowHeight);
+              this.layout(newRowHeight);
               this.rowList=[];
               this.rowList.push(lastImgInfo);
           }
           if((this.imgIndex==this.imgNum)&&(rowWidth<clientWidth)){
+  //                    newRowHeight=(clientWidth* this.baseHeight)/rowWidth;
               newRowHeight= this.baseHeight;
-              this.createRow(newRowHeight);
+              this.layout(newRowHeight);
           }
-        },
-        createRow: function(newRowHeight){
-          var _this = this;
-          var $rowCt = $("<div class='img-row'></div>");
-          $.each(this.rowList,function (idx,imgInfo) {
+      },
+
+   layout:function (newRowHeight) {
+        var _this=this;
+        var $rowCt=$("<div class='img-row'></div>");
+        $.each(this.rowList,function (idx,imgInfo) {
             var $imgCt=$("<div class='img-box'></div>"),
                 $img=$(imgInfo.target);
             var newImgWidth=(imgInfo.width+_this.marginRight)*(newRowHeight/_this.baseHeight)-_this.marginRight;
             $img.height(newRowHeight);
-            $img.width(newImgWidth);
-            console.log(imgInfo);
-            $imgCt.append($img);
-            $rowCt.append($imgCt);
-          })
-          this.$ct.append($rowCt);
-        },
-        getImgUrls: function (num) {
-            var width,height,urls=[];
-            for(var i=0;i<num;i++){
-                width=Math.floor(Math.random()*500+800);
-                height=Math.floor(Math.random()*400+600);
-                urls.push("https://unsplash.it/"+width+"/"+height);
-            }
-            return urls;
-        }
+                $img.width(newImgWidth);
+                $imgCt.append($img);
+                $rowCt.append($imgCt);
+        })
+        this.$ct.append($rowCt);
+    },
+    getImgUrls:function (num) {
+      var width,height,urls=[];
+      for(var i=0;i<num;i++){
+          width=Math.floor(Math.random()*500+800);
+          height=Math.floor(Math.random()*400+600);
+          urls.push("https://unsplash.it/"+width+"/"+height);
       }
+      return urls;
+  }
+  }
       new Barrels($(".img-preview"));
 
     </script>

@@ -10,7 +10,11 @@
 
 [jQuery img lazy load](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-img-lazy-load.html)
 
+[jQuery img lazy load oop](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-img-lazy-load-oop.html)
+
 [jQuery carousel demo 1](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-carousel-demo-one.html)
+
+[jQuery carousel oop demo 1](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-carousel-oop-demo-one.html)
 
 [jQuery carousel demo 2](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-carousel-demo-two.html)
 
@@ -18,5 +22,8 @@
 
 [jQuery Barrels layout](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-barrels-layout.html)
 
-
 [jQuery Barrels layout](https://shawnrong.github.io/demos/front-end-demos/jquery/jquery-barrels-margin-layout.html)
+
+## Javascript
+
+[javascript tabs demo oop](https://shawnrong.github.io/demos/front-end-demos/javascript/js-modal-component.html)
