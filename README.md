@@ -26,4 +26,4 @@
 
 ## Javascript
 
-[javascript tabs demo oop](https://shawnrong.github.io/demos/front-end-demos/javascript/js-modal-component.html)
+[javascript tabs demo oop](https://shawnrong.github.io/demos/front-end-demos/javascript/js-tab-component.html)
