@@ -1,12 +1,14 @@
 requirejs.config({
-  baseUrl: 'libs',
+  base: './js',
   paths: {
-      app: '../js/components',
-      jquery: '../js/libs/jquery-1.12.4-min'
+      jquery: 'libs/jquery-1.12.4-min',
+      carousel: 'components/carousel',
+      backToTop: 'components/backToTop',
+      loadMore: 'components/loadMore'
   }
 });
 
-requirejs(['jquery', 'app/carousel', 'app/backToTop', 'app/loadMore'],
+requirejs(['jquery', 'carousel', 'backToTop', 'loadMore'],
 function($, carousel, goTop, loadMore){
   carousel.init($('.carousels'));
   goTop.init($('body'), $('<a href="#" class="backToTop">TOP</a>'));
