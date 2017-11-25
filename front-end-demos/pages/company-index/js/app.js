@@ -6,8 +6,9 @@ requirejs.config({
   }
 });
 
-requirejs(['jquery', 'app/carousel', 'app/backToTop'],
-function($, carousel, goTop){
-  console.log(carousel.getHello());
-  goTop.init($('body'), $('<a href="#" class="backToTop">top</a>'));
+requirejs(['jquery', 'app/carousel', 'app/backToTop', 'app/loadMore'],
+function($, carousel, goTop, loadMore){
+  carousel.init($('.carousels'));
+  goTop.init($('body'), $('<a href="#" class="backToTop">TOP</a>'));
+  loadMore.init($('.waterfall'), $('<a href="#" class="loadMore">LOAD MORE</a>'));
 });

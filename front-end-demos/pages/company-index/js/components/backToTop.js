@@ -8,12 +8,21 @@ define(['jquery'], function($){
   }
 
   goTop.prototype.bindEvent = function(){
+    var _target = this.$target;
+    $(window).scroll(function() {
+      if($('body').scrollTop() > 20 || $('html').scrollTop() > 20){
+        $(_target).show();
+      } else {
+        $(_target).hide();
+      }
+    });
+
     this.$target.on('click', function(e){
       e.preventDefault();
       $('html,body').animate({
         scrollTop: 0
       }, 700);
-    })
+    });
   }
 
   goTop.prototype.createNode = function(){
