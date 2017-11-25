@@ -30,4 +30,4 @@
 
 ## Demo Pages
 
-[Company Index Page](https://shawnrong.github.io/demos/front-end-demos/pages/company-index/index.html)
+[Company Index Page](https://shawnrong.github.io/demos/front-end-demos/pages/company-index/)
