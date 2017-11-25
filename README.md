@@ -27,3 +27,7 @@
 ## Javascript
 
 [javascript tabs demo oop](https://shawnrong.github.io/demos/front-end-demos/javascript/js-tab-component.html)
+
+## Demo Pages
+
+[Company Index Page](https://shawnrong.github.io/demos/front-end-demos/pages/company-index/index.html)
