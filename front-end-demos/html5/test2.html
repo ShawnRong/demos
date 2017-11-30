@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HTML5&CSS3 test</title>
+  </head>
+  <style>
+    body{
+      background: url('../pages/company-index/imgs/carousel-img-1.jpeg') no-repeat;
+    }
+    body::before {
+      content: '';
+      display: block;
+      width: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom right, rgba(255, 0,0,0), red);
+    }
+    body::after {
+      content: '';
+      display: block;
+      width: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom left, rgba(255,0,0,0), rgb(187, 61, 187));
+    }
+  </style>
+  <body>
+
+  </body>
+</html>

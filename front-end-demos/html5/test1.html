@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HTML5&CSS3 test</title>
+  </head>
+  <style>
+    div {
+      margin: 10px auto;
+      transition: 1s;
+    }
+    .circle {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+      border-radius: 50px;
+    }
+    .circle-corner {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+      border-radius: 22px 50px;
+    }
+    .div-shadow {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+      box-shadow: 9px 9px 4px lightblue;
+    }
+
+    @keyframes div-transform {
+      0% {
+        transform: scale(2);
+      }
+      25% {
+        transform: scale(0.5);
+      }
+      75% {
+        transform: translateX(100px);
+      }
+      100% {
+        transform: rotate(10deg)
+      }
+    }
+
+    .div-transform {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+      margin-top: 100px;
+      animation: 8s div-transform infinite;
+    }
+
+    .threed-transform {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+      margin-top: 100px;
+      animation: 2s threed-transform infinite;
+    }
+    @keyframes threed-transform {
+      0% {
+        transform: perspective(100px);
+      }
+      50% {
+        transform: perspective(100px) rotateY(180deg);
+      }
+      100% {
+        transform: perspective(100px) rotateY(180deg) rotateX(180deg);
+      }
+    }
+    .gradient{
+      width: 100px;
+      height: 100px;
+      background-image: linear-gradient(skyblue, pink);
+    }
+  </style>
+  <body>
+    <div class="circle"></div>
+    <div class="circle-corner"></div>
+    <div class="div-shadow"></div>
+    <div class="div-transform"></div>
+    <div class="threed-transform"></div>
+    <div class="gradient"></div>
+  </body>
+</html>
